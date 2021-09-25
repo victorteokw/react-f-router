@@ -7,7 +7,7 @@ interface RouterProps {
 }
 
 const Router: FunctionComponent<RouterProps> = ({ path, children }) => {
-    const childrenArray = React.Children.toArray(children);
+    const childrenArray = React.Children.toArray(children)
     let defaultElement: React.ReactElement = <></>
     for (const child of childrenArray) {
         const elementChild = child as React.ReactElement
@@ -16,9 +16,11 @@ const Router: FunctionComponent<RouterProps> = ({ path, children }) => {
             defaultElement = elementChild
         }
         if (type.isRoute) {
-            const matcher = elementChild.props.match.replace(/<.+?>/g, '([^<>/]+?)') + '$'
+            const matcher = elementChild.props.match
+                .replace(/\*/g, '([^<>]+?)')
+                .replace(/<.+?>/g, '([^<>/]+?)') + '$'
             if (path.match(new RegExp(matcher))) {
-                return cloneElement(elementChild, { path })
+                return cloneElement(elementChild, { path, matcher })
             }
         }
     }
