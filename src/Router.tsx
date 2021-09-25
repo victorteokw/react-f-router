@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { cloneElement } from 'react';
 import { NotFoundComponent } from './NotFound'
 
@@ -6,7 +6,8 @@ interface RouterProps {
     path: string
 }
 
-const Router: FunctionComponent<RouterProps> = ({ path, children }) => {
+const Router: FC<RouterProps> = ({ path, children }) => {
+    path = path.replace(/\/$/, '')
     const childrenArray = React.Children.toArray(children)
     let defaultElement: React.ReactElement = <></>
     for (const child of childrenArray) {
@@ -16,7 +17,7 @@ const Router: FunctionComponent<RouterProps> = ({ path, children }) => {
             defaultElement = elementChild
         }
         if (type.isRoute) {
-            const matcher = elementChild.props.match
+            const matcher = '^' + elementChild.props.match
                 .replace(/\*/g, '([^<>]+?)')
                 .replace(/<.+?>/g, '([^<>/]+?)') + '$'
             if (path.match(new RegExp(matcher))) {

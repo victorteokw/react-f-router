@@ -1,10 +1,10 @@
-import React, { FunctionComponent, ReactElement } from 'react'
+import { FC, ReactElement } from 'react'
 
 export interface NotFoundProps {
   children: ReactElement
 }
 
-export interface NotFoundComponent extends FunctionComponent<NotFoundProps> {
+export interface NotFoundComponent extends FC<NotFoundProps> {
   isRoute: boolean
   isNotFound: boolean
 }

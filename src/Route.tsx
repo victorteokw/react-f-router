@@ -1,11 +1,11 @@
-import React, { FunctionComponent, ReactElement, cloneElement } from 'react'
+import { FC, ReactElement, cloneElement } from 'react'
 
 interface RouteProps {
     match: string
     children: ReactElement
 }
 
-export interface RouteComponent<RouteProps> extends FunctionComponent<RouteProps> {
+export interface RouteComponent<RouteProps> extends FC<RouteProps> {
     isRoute: boolean
     isNotFound: boolean
 }

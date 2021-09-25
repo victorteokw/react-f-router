@@ -1,6 +1,6 @@
 {
   "name": "react-clean-router",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Tiniest react router which is clean.",
   "types": "lib/index.d.ts",
   "main": "lib/index.js",
