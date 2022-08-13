@@ -3,6 +3,7 @@ import { cloneElement } from 'react';
 import { NotFoundComponent } from './NotFound'
 
 interface RouterProps {
+    children?: React.ReactNode
     path: string
 }
 
