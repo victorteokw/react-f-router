@@ -8,7 +8,9 @@ interface RouterProps {
 }
 
 const Router: FC<RouterProps> = ({ path, children }) => {
-    path = path.replace(/\/$/, '')
+    if (path != "/") {
+        path = path.replace(/\/$/, '')
+    }
     const childrenArray = React.Children.toArray(children)
     let defaultElement: React.ReactElement = <></>
     for (const child of childrenArray) {
