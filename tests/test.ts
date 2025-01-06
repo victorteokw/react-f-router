@@ -2,6 +2,16 @@ import { describe, it, expect } from '@jest/globals'
 import { route } from '../src'
 
 describe('route', () => {
+
+  // it("better way", () => {
+  //   const path = "/"
+  //   const result = route(path, (match) => first([
+  //       [match('/'), (props) => ["HomePage", props]],
+  //       [match('/about'), (props) => ["AboutPage", props]],
+  //     ])
+  //   )
+  // })
+
   it("should match '/'", () => {
     const path = '/'
     const result = route(path, (match) => {

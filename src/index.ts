@@ -6,11 +6,9 @@ function matchAll(path: string, pattern: string) {
   if (path != "/") {
     path = path.replace(/\/$/, '')
   }
-  const matcher = '^' + pattern
-    .replace(/\*/g, '([^<>]+?)')
-    .replace(/<.+?>/g, '([^<>/]+?)') + '$'
+  const matcher = '^' + pattern.replace(/\*[^\*\:/]+/g, '([^\*\:]+)').replace(/\:[^\*\:/]+/g, '([^\*\:/]+)') + '$'
   if (path.match(new RegExp(matcher))) {
-    const tokens = (pattern.match(/\*|<.+?>/g) ?? []).map((t) => t.slice(1, t.length - 1))
+    const tokens = (pattern.match(/\*[^\*\:/]+|\:[^\*\:/]+/g) ?? []).map((t) => t.slice(1))
     if (tokens) {
       const values = path.match(new RegExp(matcher))
       const props: {[key: string]: string} = {}
