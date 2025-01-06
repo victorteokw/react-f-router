@@ -27,3 +27,26 @@ function App() {
   </>
 }
 ```
+
+## Future Usage
+
+If you have new pipe operator, you can use like this.
+
+```tsx
+function App() {
+  const [{ pathname }, setPath] = usePath()
+  return <>
+    {route(pathname, (extract) => {
+      extract('/') |> some(() => <HomePage />) ??
+      extract('/about') |> some(element(AboutPage)) ??
+      extract('/posts/:id') |> some((props) => <PostPage {...props} />) ??
+      extract('/file/*path') |> some((props) => <Download file={props.path}>) ??
+      <NotFound />
+    })}
+  </>
+}
+```
+
+## License
+
+## Contribution
