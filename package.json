@@ -16,14 +16,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/victorteo/react-clean-router.git"
+    "url": "git+https://github.com/victorteo/react-fouter.git"
   },
   "author": "Victor Teo <yeannylam@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/victorteo/react-clean-router/issues"
+    "url": "https://github.com/victorteo/react-fouter/issues"
   },
-  "homepage": "https://github.com/victorteo/react-clean-router#readme",
+  "homepage": "https://github.com/victorteo/react-fouter#readme",
+  "dependencies": {
+    "react": ">= 18"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-typescript": "^7.26.0",
