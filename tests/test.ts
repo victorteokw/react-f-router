@@ -1,65 +1,65 @@
 import { describe, it, expect } from '@jest/globals'
-import { route } from '../src'
+import { route, pipe, some } from '../src'
 
 describe('route', () => {
 
-  // it("better way", () => {
-  //   const path = "/"
-  //   const result = route(path, (match) => first([
-  //       [match('/'), (props) => ["HomePage", props]],
-  //       [match('/about'), (props) => ["AboutPage", props]],
-  //     ])
-  //   )
-  // })
-
   it("should match '/'", () => {
     const path = '/'
-    const result = route(path, (match) => {
-      let props: Record<string, string> | null = null
-      if (props = match('/')) {
-        return ["HomePage", props]
-      } else if (props = match('/about')) {
-        return ["AboutPage", props]
-      } else if (props = match('/posts/:id')) {
-        return ["PostPage", props]
-      } else {
-        return ["NotFoundPage", {}]
-      }
-    })
+    const result = route(path, (extract) =>
+      pipe(extract('/about'), some((props) => ["AboutPage", props])) ??
+      pipe(extract('/posts/:id'), some((props) => ["PostPage", props])) ??
+      pipe(extract('/p/:pId/d/:dId'), some((props) => ["PostPage", props])) ??
+      pipe(extract('/'), some((props) => ["HomePage", props])) ??
+      ["NotFoundPage", {}]
+    )
     expect(result).toEqual(["HomePage", {}])
   })
 
   it("should match '/about'", () => {
     const path = '/about'
-    const result = route(path, (match) => {
-      let props: Record<string, string> | null = null
-      if (props = match('/')) {
-        return ["HomePage", props]
-      } else if (props = match('/about')) {
-        return ["AboutPage", props]
-      } else if (props = match('/posts/:id')) {
-        return ["PostPage", props]
-      } else {
-        return ["NotFoundPage", {}]
-      }
-    })
+    const result = route(path, (extract) =>
+      pipe(extract('/'), some((props) => ["HomePage", props])) ??
+      pipe(extract('/about'), some((props) => ["AboutPage", props])) ??
+      pipe(extract('/posts/:id'), some((props) => ["PostPage", props])) ??
+      pipe(extract('/p/:pId/d/:dId'), some((props) => ["PostPage", props])) ??
+      ["NotFoundPage", {}]
+    )
     expect(result).toEqual(["AboutPage", {}])
   })
 
   it("should match '/posts/123'", () => {
     const path = '/posts/123'
-    const result = route(path, (match) => {
-      let props: Record<string, string> | null = null
-      if (props = match('/')) {
-        return ["HomePage", props]
-      } else if (props = match('/about')) {
-        return ["AboutPage", props]
-      } else if (props = match('/posts/:id')) {
-        return ["PostPage", props]
-      } else {
-        return ["NotFoundPage", {}]
-      }
-    })
+    const result = route(path, (extract) =>
+      pipe(extract('/'), some((props) => ["HomePage", props])) ??
+      pipe(extract('/about'), some((props) => ["AboutPage", props])) ??
+      pipe(extract('/posts/:id'), some((props) => ["PostPage", props])) ??
+      pipe(extract('/p/:pId/d/:dId'), some((props) => ["PostPage", props])) ??
+      ["NotFoundPage", {}]
+    )
     expect(result).toEqual(["PostPage", { id: "123" }])
+  })
+
+  it("should match not found", () => {
+    const path = '/abc/def/ghi'
+    const result = route(path, (extract) =>
+      pipe(extract('/'), some((props) => ["HomePage", props])) ??
+      pipe(extract('/about'), some((props) => ["AboutPage", props])) ??
+      pipe(extract('/posts/:id'), some((props) => ["PostPage", props])) ??
+      pipe(extract('/p/:pId/d/:dId'), some((props) => ["PostPage", props])) ??
+      ["NotFoundPage", {}]
+    )
+    expect(result).toEqual(["NotFoundPage", {}])
+  })
+
+  it("should match /start/abc/def/ghi/end", () => {
+    const path = '/start/abc/def/ghi/end'
+    const result = route(path, (extract) =>
+      pipe(extract('/'), some((props) => ["HomePage", props])) ??
+      pipe(extract('/start/*catch/end'), some((props) => ["AboutPage", props])) ??
+      pipe(extract('/posts/:id'), some((props) => ["PostPage", props])) ??
+      pipe(extract('/p/:pId/d/:dId'), some((props) => ["PostPage", props])) ??
+      ["NotFoundPage", {}]
+    )
+    expect(result).toEqual(["AboutPage", {"catch": "abc/def/ghi"}])
   })
 })

@@ -1,9 +1,14 @@
 {
-  "name": "react-clean-router",
-  "version": "2.0.0",
-  "description": "Tiniest react router which is clean.",
-  "types": "lib/index.d.ts",
-  "main": "lib/index.js",
+  "name": "react-fouter",
+  "version": "0.1.0",
+  "description": "Functional and performant React router.",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/**/*"
+  ],
   "scripts": {
     "prepublish": "npx tsc",
     "test": "jest",
