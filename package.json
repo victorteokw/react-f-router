@@ -1,5 +1,5 @@
 {
-  "name": "react-fouter",
+  "name": "react-f-router",
   "version": "0.1.0",
   "description": "Functional and performant React router.",
   "types": "dist/index.d.ts",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/victorteo/react-fouter.git"
+    "url": "git+https://github.com/victorteo/react-f-router.git"
   },
   "author": "Victor Teo <yeannylam@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/victorteo/react-fouter/issues"
+    "url": "https://github.com/victorteo/react-f-router/issues"
   },
-  "homepage": "https://github.com/victorteo/react-fouter#readme",
+  "homepage": "https://github.com/victorteo/react-f-router#readme",
   "dependencies": {
     "react": ">= 18"
   },

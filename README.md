@@ -1,12 +1,12 @@
-React Fouter
+React F Router
 ==================
 
-Functional and performant React router.
+Functional and performant React router. **Code size compressed less than 1Kb.**
 
 ## Installation
 
 ```sh
-npm i react-fouter
+npm i react-f-router
 ```
 
 ## Usage
