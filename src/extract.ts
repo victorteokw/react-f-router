@@ -40,8 +40,9 @@ export const extractPath: ExtarctPath = <P extends string>(
     path = path.replace(/\/$/, '')
   }
   const matcher = '^' + pattern
-    .replace(/\*[^\*\:/]+/g, '([^\*\:]+)')
-    .replace(/\:[^\*\:/]+/g, '([^\*\:/]+)') + '$'
+    .replace(/\:[^\*\:/]+/g, '([^\*\:/]+)')
+    .replace(/\*[^\*\:/]+/g, '([^\*\:]+)') + '$'
+  console.log(`see this matcher ${matcher}`)
   if (path.match(new RegExp(matcher))) {
     const tokens = (pattern.match(/\*[^\*\:/]+|\:[^\*\:/]+/g) ?? [])
       .map((t) => t.slice(1))
