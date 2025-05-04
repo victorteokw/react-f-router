@@ -49,4 +49,6 @@ function App() {
 
 ## License
 
+MIT License
+
 ## Contribution
